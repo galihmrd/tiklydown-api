@@ -8,7 +8,7 @@ app = Flask(__name__)
 def tikly():
     try:
         BASE_URL = "https://api.tiklydown.eu.org"
-        r = requests.get(BASE_URL + f"/api/download?url={request.args.get("url")}", timeout=10)
+        r = requests.get(BASE_URL + f"/api/download?url={request.args.get('url')}", timeout=10)
         return make_response(jsonify({r.json()}), 200)
     except BaseException:
         raise Exception("No results found!")
