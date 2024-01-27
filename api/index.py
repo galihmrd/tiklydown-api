@@ -6,9 +6,13 @@ app = Flask(__name__)
 
 @app.route("/tiklydown", methods=["GET"])
 def tikly():
+    if request.args.get('url').endswith("@fhd"):
+        input_url = request.args.get('url').split("@fhd")[0]
+    else:
+        input_url = request.args.get('url')
     try:
         BASE_URL = "https://api.tiklydown.eu.org"
-        r = requests.get(BASE_URL + f"/api/download?url={request.args.get('url')}", timeout=10)
+        r = requests.get(BASE_URL + f"/api/download?url={input_url}", timeout=10)
         return make_response(r.json(), 200)
     except BaseException:
         raise Exception("No results found!")
